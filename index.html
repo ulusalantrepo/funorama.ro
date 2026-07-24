@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ro" class="lang-ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUN-O-RAMA — Bowling, Billiard &amp; Family Entertainment Center | Grand Arena Mall Bucureşti</title>
+<meta name="description" content="FUN-O-RAMA Grand Arena Mall: bowling pe 6 piste, 4 mese de biliard, playground pentru copii şi zeci de jocuri arcade, în inima Bucureştiului.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #090c13;
+    --surface: #12161f;
+    --surface-2: #181d29;
+    --line: #262c3a;
+    --blue: #2cb3ea;
+    --blue-dim: #1c7fa8;
+    --red: #ea2430;
+    --gold: #fdb927;
+    --text: #f4f3ee;
+    --muted: #97a0b3;
+    --muted-2: #6b7386;
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Baloo 2', sans-serif;
+    margin:0;
+    letter-spacing:.2px;
+  }
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:2px;
+    background:var(--gold);
+    display:inline-block;
+    border-radius:2px;
+  }
+
+  /* ---- language toggling ---- */
+  .lang-ro .en{display:none;}
+  .lang-en .ro{display:none;}
+
+  /* ---- signature neon rule ---- */
+  .neon-rule{
+    height:3px;
+    width:100%;
+    background:linear-gradient(90deg,
+      var(--blue) 0%, var(--blue) 22%,
+      var(--red) 32%, var(--red) 52%,
+      var(--gold) 62%, var(--gold) 100%);
+    border-radius:3px;
+    box-shadow:0 0 18px rgba(44,179,234,.35), 0 0 18px rgba(234,36,48,.2);
+    opacity:.9;
+  }
+  .neon-rule.tight{max-width:180px;}
+
+  /* ---- header / nav ---- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(9,12,19,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 28px;
+    max-width:1180px;
+    margin:0 auto;
+    gap:16px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+  }
+  .brand img{height:38px;width:auto;}
+  nav.links{
+    display:flex;
+    gap:26px;
+    align-items:center;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--muted);
+    position:relative;
+    padding:4px 0;
+    transition:color .2s ease;
+    white-space:nowrap;
+  }
+  nav.links a:hover{color:var(--text);}
+  nav.links a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:-3px;
+    width:0%;
+    height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--red),var(--gold));
+    transition:width .25s ease;
+    border-radius:2px;
+  }
+  nav.links a:hover::after{width:100%;}
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .lang-btn{
+    display:flex;
+    border:1px solid var(--line);
+    border-radius:999px;
+    overflow:hidden;
+    background:var(--surface);
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:.5px;
+  }
+  .lang-btn button{
+    border:none;
+    background:transparent;
+    color:var(--muted);
+    padding:8px 14px;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+    letter-spacing:.5px;
+    transition:.2s ease;
+  }
+  .lang-btn button.active{
+    background:linear-gradient(90deg,var(--blue),var(--blue-dim));
+    color:#04121a;
+  }
+  .menu-toggle{
+    display:none;
+    background:none;border:1px solid var(--line);
+    color:var(--text);border-radius:10px;
+    padding:8px 10px;cursor:pointer;
+  }
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('images/storefront.jpeg') center 60% / cover no-repeat;
+    filter:saturate(1.15) brightness(.5);
+    transform:scale(1.03);
+  }
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(9,12,19,.55) 0%, rgba(9,12,19,.55) 40%, rgba(9,12,19,.96) 100%),
+      linear-gradient(90deg, rgba(9,12,19,.92) 0%, rgba(9,12,19,.35) 55%, rgba(9,12,19,.75) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+    width:100%;
+  }
+  .hero-logo{
+    max-width:360px;
+    width:52vw;
+    margin-bottom:26px;
+    filter:drop-shadow(0 10px 30px rgba(0,0,0,.45));
+  }
+  .hero h1{
+    font-size:clamp(28px,4.6vw,52px);
+    line-height:1.08;
+    max-width:720px;
+    color:var(--text);
+  }
+  .hero h1 .accent{
+    background:linear-gradient(90deg,var(--blue),var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    margin-top:20px;
+    max-width:560px;
+    color:var(--muted);
+    font-size:17px;
+  }
+  .hero-tagline{
+    font-family:'Caveat',cursive;
+    font-size:26px;
+    color:var(--gold);
+    margin-top:6px;
+    display:inline-block;
+  }
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 24px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:14.5px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:linear-gradient(90deg,var(--red),#ff4d55);
+    color:#fff;
+    box-shadow:0 8px 24px rgba(234,36,48,.32);
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line);
+    color:var(--text);
+  }
+  .hero-stats{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    margin-top:56px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-stats .stat{
+    background:rgba(9,12,19,.7);
+    padding:22px 20px;
+    text-align:left;
+  }
+  .stat .num{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(22px,3vw,34px);
+    color:var(--blue);
+  }
+  .stat .label{
+    font-size:12.5px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-top:4px;
+  }
+
+  /* ---- generic section ---- */
+  section{padding:96px 0;}
+  section.tight{padding:64px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:52px;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3.4vw,40px);
+    line-height:1.15;
+  }
+  .section-head p{
+    color:var(--muted);
+    margin-top:16px;
+    font-size:16px;
+  }
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ---- about ---- */
+  #despre{
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about-copy p{color:var(--muted);margin:0 0 16px;}
+  .about-copy strong{color:var(--text);}
+  .about-card{
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+  .about-card h3{
+    font-size:18px;
+    margin-bottom:14px;
+    color:var(--gold);
+  }
+  .about-card ul{
+    list-style:none;
+    margin:0;padding:0;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .about-card li{
+    display:flex;
+    gap:12px;
+    color:var(--muted);
+    font-size:14.5px;
+    align-items:flex-start;
+  }
+  .about-card li .dot{
+    width:8px;height:8px;border-radius:50%;
+    margin-top:6px;flex:none;
+    background:linear-gradient(135deg,var(--blue),var(--red));
+  }
+
+  /* ---- location intro ---- */
+  #locatie .location-media{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    margin-bottom:52px;
+    position:relative;
+  }
+  #locatie .location-media img{width:100%;height:420px;object-fit:cover;}
+  .location-media .tag{
+    position:absolute;
+    left:20px;bottom:20px;
+    background:rgba(9,12,19,.75);
+    border:1px solid var(--line);
+    backdrop-filter:blur(6px);
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  .stat-strip .box{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px 20px;
+    text-align:center;
+  }
+  .stat-strip .box .num{
+    font-family:'Baloo 2',sans-serif;
+    font-size:32px;
+    color:var(--gold);
+  }
+  .stat-strip .box .label{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+  }
+
+  /* ---- zones ---- */
+  #zone{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .zone-list{display:flex;flex-direction:column;gap:0;}
+  .zone{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:center;
+    padding:52px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .zone:last-child{border-bottom:none;}
+  .zone:nth-child(even) .zone-media{order:2;}
+  .zone-media{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    aspect-ratio:4/3;
+  }
+  .zone-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .zone-media:hover img{transform:scale(1.05);}
+  .zone-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .zone-badge.blue{background:rgba(44,179,234,.14);color:var(--blue);}
+  .zone-badge.red{background:rgba(234,36,48,.14);color:#ff6b72;}
+  .zone-badge.gold{background:rgba(253,185,39,.14);color:var(--gold);}
+  .zone h3{font-size:26px;margin-bottom:14px;}
+  .zone p{color:var(--muted);margin:0 0 14px;}
+  .zone .facts{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-top:18px;
+  }
+  .zone .facts span{
+    border:1px solid var(--line);
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  /* ---- redemption / cafe strip ---- */
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .split .panel{padding:48px;background:var(--surface-2);}
+  .split .panel.media{padding:0;}
+  .split .panel.media img{width:100%;height:100%;object-fit:cover;min-height:320px;}
+  .split h3{font-size:24px;margin-bottom:14px;}
+  .split p{color:var(--muted);}
+
+  /* ---- birthday ---- */
+  #zi-de-nastere{
+    background:var(--surface);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .birthday-card{
+    background:linear-gradient(135deg, rgba(234,36,48,.10), rgba(44,179,234,.10));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:52px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:40px;
+    align-items:center;
+  }
+  .birthday-card h2{font-size:30px;margin-bottom:16px;}
+  .birthday-card p{color:var(--muted);margin-bottom:22px;}
+  .contact-pill{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px;
+  }
+  .contact-pill a{
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;color:var(--text);
+    font-weight:600;font-size:15px;
+  }
+  .contact-pill .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;}
+
+  /* ---- gallery strip ---- */
+  #galerie{
+    padding-top:0;
+  }
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:180px;
+    gap:10px;
+  }
+  .gallery-grid img{
+    width:100%;height:100%;object-fit:cover;
+    border-radius:12px;
+    border:1px solid var(--line);
+    transition:transform .4s ease, filter .4s ease;
+    filter:saturate(1.05);
+  }
+  .gallery-grid img:hover{transform:scale(1.03);filter:saturate(1.3);}
+  .gallery-grid .g1{grid-column:span 2;grid-row:span 2;}
+  .gallery-grid .g2{grid-column:span 2;}
+  .gallery-grid .g5{grid-column:span 2;}
+
+  /* ---- contact ---- */
+  #contact{
+    background:var(--surface);
+    border-top:1px solid var(--line);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  .contact-info h2{font-size:30px;margin-bottom:18px;}
+  .contact-info p{color:var(--muted);margin-bottom:28px;max-width:440px;}
+  .info-row{
+    display:flex;gap:14px;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .info-row:last-of-type{border-bottom:none;}
+  .info-row .ic{
+    width:38px;height:38px;border-radius:10px;
+    background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+    color:var(--blue);
+  }
+  .info-row .t{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted-2);}
+  .info-row .v{font-weight:600;font-size:15px;margin-top:2px;}
+  .social-row{display:flex;gap:12px;margin-top:26px;}
+  .social-row a{
+    width:44px;height:44px;border-radius:12px;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:var(--text);
+    transition:.2s ease;
+  }
+  .social-row a:hover{background:linear-gradient(135deg,var(--blue),var(--red));border-color:transparent;}
+  .map-wrap{
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    min-height:340px;
+  }
+  .map-wrap iframe{width:100%;height:100%;min-height:340px;border:0;filter:grayscale(.3) invert(.92) contrast(.9);}
+
+  footer{
+    padding:36px 0;
+    border-top:1px solid var(--line);
+    text-align:center;
+    color:var(--muted-2);
+    font-size:13px;
+  }
+  footer .brand-mini{
+    font-family:'Baloo 2',sans-serif;
+    color:var(--text);
+    font-size:16px;
+    margin-bottom:8px;
+    display:block;
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width:900px){
+    nav.links{display:none;}
+    .menu-toggle{display:inline-flex;}
+    .about-grid, .contact-grid, .split, .birthday-card{grid-template-columns:1fr;}
+    .zone{grid-template-columns:1fr;gap:24px;padding:36px 0;}
+    .zone:nth-child(even) .zone-media{order:0;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+    .gallery-grid .g1{grid-column:span 2;grid-row:span 1;}
+    .split .panel{padding:32px;}
+    .birthday-card{padding:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#top" class="brand">
+      <img src="images/logo.jpeg" alt="FUN-O-RAMA">
+    </a>
+    <nav class="links">
+      <a href="#despre"><span class="ro">Despre noi</span><span class="en">About</span></a>
+      <a href="#locatie"><span class="ro">Locaţie</span><span class="en">Location</span></a>
+      <a href="#zone"><span class="ro">Zone de joc</span><span class="en">Play zones</span></a>
+      <a href="#zi-de-nastere"><span class="ro">Petreceri</span><span class="en">Birthdays</span></a>
+      <a href="#contact"><span class="ro">Contact</span><span class="en">Contact</span></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-btn">
+        <button id="btn-ro" class="active" onclick="setLang('ro')">RO</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <img class="hero-logo" src="images/logo.jpeg" alt="FUN-O-RAMA logo">
+    <h1>
+      <span class="ro">Bowling, biliard şi <span class="accent">joacă fără sfârşit</span> sub acelaşi acoperiş</span>
+      <span class="en">Bowling, billiard and <span class="accent">non-stop fun</span> under one roof</span>
+    </h1>
+    <p class="lead">
+      <span class="ro">FUN-O-RAMA Grand Arena Mall este centrul de familie şi entertainment din Bucureşti: 6 piste de bowling, 4 mese de biliard, playground pentru cei mici şi zeci de jocuri arcade cu premii.</span>
+      <span class="en">FUN-O-RAMA Grand Arena Mall is Bucharest's family entertainment center: 6 bowling lanes, 4 billiard tables, a playground for little ones and dozens of prize-winning arcade games.</span>
+    </p>
+    <span class="hero-tagline">
+      <span class="ro">1450 m² pline de distracţie.</span>
+      <span class="en">1450 m² of pure fun.</span>
+    </span>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">
+        <span class="ro">Rezervă / Contactează-ne</span>
+        <span class="en">Book / Contact us</span>
+      </a>
+      <a class="btn btn-ghost" href="#zone">
+        <span class="ro">Vezi zonele de joc</span>
+        <span class="en">Explore the play zones</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="num">6</div>
+      <div class="label"><span class="ro">Piste de bowling</span><span class="en">Bowling lanes</span></div>
+    </div>
+    <div class="stat">
+      <div class="num">4</div>
+      <div class="label"><span class="ro">Mese de biliard</span><span class="en">Billiard tables</span></div>
+    </div>
+    <div class="stat">
+      <div class="num">350m²</div>
+      <div class="label"><span class="ro">Playground copii</span><span class="en">Kids' playground</span></div>
+    </div>
+    <div class="stat">
+      <div class="num">1450m²</div>
+      <div class="label"><span class="ro">Suprafaţă totală</span><span class="en">Total floor area</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="despre">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy">
+        <div class="eyebrow"><span class="ro">Despre noi</span><span class="en">About us</span></div>
+        <h2 style="font-size:clamp(24px,3vw,34px);margin-bottom:22px;">
+          <span class="ro">E.G.S Turism S.R.L, compania din spatele mărcii FUN-O-RAMA</span>
+          <span class="en">E.G.S Turism S.R.L, the company behind the FUN-O-RAMA brand</span>
+        </h2>
+        <p>
+          <span class="ro">Numele companiei noastre este <strong>E.G.S Turism S.R.L</strong>, iar marca sub care activăm este <strong>FUN-O-RAMA</strong>. Cu peste 25 de ani de experienţă în sector din partea echipei de conducere fondatoare, FUN-O-RAMA a devenit un furnizor de soluţii lider în industria entertainmentului.</span>
+          <span class="en">Our company is called <strong>E.G.S Turism S.R.L</strong>, operating under the brand <strong>FUN-O-RAMA</strong>. Backed by more than 25 years of industry experience within our founding management team, FUN-O-RAMA has become a leading solutions provider in the entertainment sector.</span>
+        </p>
+        <p>
+          <span class="ro">Avem un rol important în proiectele mall-urilor şi companiilor de leasing din mall-uri, ale investitorilor, micilor antreprenori, noilor start-up-uri şi hotelurilor din România, Turcia şi ţările din regiune. Cu echipa noastră de experţi, înţelegem cerinţele şi nevoile clienţilor şi oferim sprijin şi servicii de design, consultanţă şi management operaţional.</span>
+          <span class="en">We hold an important place in the projects of malls and mall-leasing companies, investors, small business owners, new start-ups and hotels across Romania, Turkey and the wider region. With our expert team, we understand our clients' requirements and needs, providing support and services in design, consultancy and operations management.</span>
+        </p>
+        <p>
+          <span class="ro">FUN-O-RAMA oferă o gamă largă de opţiuni pentru echipamente de centre de entertainment pentru familie, maşini de joc, echipamente de parc tematic şi tot ce ţine de acest sector, în România şi la nivel internaţional. Ne extindem permanent reţeaua de furnizori pentru a aduce produse noi şi de calitate.</span>
+          <span class="en">FUN-O-RAMA offers a wide range of options for family entertainment center equipment, game machines, theme park equipment and everything else within the industry, both in Romania and internationally. We are constantly expanding our supplier network to bring new, high-quality products.</span>
+        </p>
+        <p>
+          <span class="ro">Primul nostru centru de bowling şi entertainment pentru familie şi copii a fost deschis în <strong>Grand Arena Mall, Bucureşti</strong>. Pe o suprafaţă de 1450 m², oferim oaspeţilor noştri zone de joacă variate.</span>
+          <span class="en">Our brand's first bowling, family and children's play &amp; entertainment center opened inside <strong>Grand Arena Mall, Bucharest</strong>. Across 1450 m², we welcome our guests with a variety of play areas.</span>
+        </p>
+      </div>
+      <div class="about-card">
+        <h3><span class="ro">Susţinem proiecte pentru</span><span class="en">We support projects for</span></h3>
+        <ul>
+          <li><span class="dot"></span><span><span class="ro">Mall-uri şi companii de leasing în mall-uri</span><span class="en">Malls and mall-leasing companies</span></span></li>
+          <li><span class="dot"></span><span><span class="ro">Investitori şi noi antreprenori</span><span class="en">Investors and new entrepreneurs</span></span></li>
+          <li><span class="dot"></span><span><span class="ro">Mici afaceri existente</span><span class="en">Existing small businesses</span></span></li>
+          <li><span class="dot"></span><span><span class="ro">Hoteluri din România, Turcia şi regiune</span><span class="en">Hotels across Romania, Turkey and the region</span></span></li>
+          <li><span class="dot"></span><span><span class="ro">Design, consultanţă şi management operaţional</span><span class="en">Design, consultancy and operations management</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="locatie">
+  <div class="container">
+    <div class="location-media">
+      <img src="images/storefront.jpeg" alt="FUN-O-RAMA Grand Arena Mall">
+      <div class="tag"><span class="ro">Grand Arena Mall · Bucureşti</span><span class="en">Grand Arena Mall · Bucharest</span></div>
+    </div>
+    <div class="section-head">
+      <div class="eyebrow"><span class="ro">FUN-O-RAMA Grand Arena Mall</span><span class="en">FUN-O-RAMA Grand Arena Mall</span></div>
+      <h2><span class="ro">Punctul de întâlnire al distracţiei din Bucureşti</span><span class="en">Bucharest's meeting point for fun</span></h2>
+      <p>
+        <span class="ro">Centrul nostru de bowling şi joacă pentru familie şi copii, situat în Grand Arena Mall, a devenit unul dintre reperele de neratat ale zonei. Pe 1450 m² găsiţi 6 piste de bowling, un playground, o cafenea, mese de biliard, jocuri arcade pentru toate vârstele şi un sistem de redemption care ţine oaspeţii mereu în priza distracţiei.</span>
+        <span class="en">Our bowling and family &amp; children's entertainment center inside Grand Arena Mall has become one of the area's not-to-be-missed spots. Across 1450 m² you'll find 6 bowling lanes, a playground, a café, billiard tables, arcade games for every age, and a redemption system that keeps guests coming back for more.</span>
+      </p>
+    </div>
+    <div class="stat-strip">
+      <div class="box"><div class="num">2–10</div><div class="label"><span class="ro">Vârstă playground</span><span class="en">Playground ages</span></div></div>
+      <div class="box"><div class="num">6</div><div class="label"><span class="ro">Piste bowling</span><span class="en">Bowling lanes</span></div></div>
+      <div class="box"><div class="num">4</div><div class="label"><span class="ro">Mese biliard american</span><span class="en">American pool tables</span></div></div>
+      <div class="box"><div class="num">7–70</div><div class="label"><span class="ro">Vârstă jocuri arcade</span><span class="en">Arcade games for ages</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="zone">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="ro">Zone de joc</span><span class="en">Play zones</span></div>
+      <h2><span class="ro">Patru zone, o singură destinaţie</span><span class="en">Four zones, one destination</span></h2>
+      <p><span class="ro">Playground, bowling, biliard şi jocuri arcade — fiecare colţ al FUN-O-RAMA are propria lui poveste de distracţie.</span><span class="en">Playground, bowling, billiard and arcade games — every corner of FUN-O-RAMA has its own story of fun.</span></p>
+    </div>
+
+    <div class="zone-list">
+
+      <div class="zone">
+        <div class="zone-media"><img src="images/ballpit-girl.jpeg" alt="Playground FUN-O-RAMA"></div>
+        <div class="zone-copy">
+          <span class="zone-badge blue"><span class="ro">Playground</span><span class="en">Playground</span></span>
+          <h3><span class="ro">O lume întreagă pentru cei mici</span><span class="en">A whole world for little ones</span></h3>
+          <p><span class="ro">Pe 350 m², playground-ul nostru este gândit pentru toţi oaspeţii cu vârste între 2 şi 10 ani. Un top havuzu (bazin cu bile) generos, tobogane variate şi jocuri cu obstacole fac din această zonă locul unde copiii se distrează cel mai mult.</span><span class="en">Set across 350 m², our playground is designed for guests aged 2 to 10. A generous ball pit, a variety of slides and obstacle games make this the area where children have the most fun.</span></p>
+          <div class="facts">
+            <span><span class="ro">350 m²</span><span class="en">350 m²</span></span>
+            <span><span class="ro">2–10 ani</span><span class="en">Ages 2–10</span></span>
+            <span><span class="ro">Bazin cu bile</span><span class="en">Ball pit</span></span>
+            <span><span class="ro">Tobogane şi obstacole</span><span class="en">Slides &amp; obstacles</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone">
+        <div class="zone-media"><img src="images/bowling-balls.jpeg" alt="Bowling FUN-O-RAMA"></div>
+        <div class="zone-copy">
+          <span class="zone-badge red"><span class="ro">Bowling</span><span class="en">Bowling</span></span>
+          <h3><span class="ro">6 piste, de la 7 la 70 de ani</span><span class="en">6 lanes, from age 7 to 70</span></h3>
+          <p><span class="ro">Zona noastră de bowling cu 6 piste este locul unde toţi oaspeţii noştri, de la 7 la 70 de ani, petrec timp de calitate. Serviţi o băutură caldă sau rece din zona de cafe şi bucuraţi-vă de o seară frumoasă alături de familie sau prieteni.</span><span class="en">Our 6-lane bowling area is where all our guests, from age 7 to 70, enjoy quality time together. Grab a hot or cold drink from our café corner and enjoy a great evening with family or friends.</span></p>
+          <div class="facts">
+            <span><span class="ro">6 piste</span><span class="en">6 lanes</span></span>
+            <span><span class="ro">De la 7 la 70 de ani</span><span class="en">Ages 7 to 70</span></span>
+            <span><span class="ro">Cafe alăturat</span><span class="en">Café on-site</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone">
+        <div class="zone-media"><img src="images/billiard-row.jpeg" alt="Biliard FUN-O-RAMA"></div>
+        <div class="zone-copy">
+          <span class="zone-badge gold"><span class="ro">Biliard</span><span class="en">Billiard</span></span>
+          <h3><span class="ro">4 mese de biliard american</span><span class="en">4 American pool tables</span></h3>
+          <p><span class="ro">În zona noastră vă aşteaptă 4 mese de biliard american, într-un decor cu neon-uri şi atmosferă retro-arcade, perfecte pentru o partidă relaxată cu prietenii.</span><span class="en">Our area features 4 American pool tables, set in a neon-lit, retro-arcade atmosphere — perfect for a relaxed game with friends.</span></p>
+          <div class="facts">
+            <span><span class="ro">4 mese</span><span class="en">4 tables</span></span>
+            <span><span class="ro">Biliard american</span><span class="en">American pool</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone">
+        <div class="zone-media"><img src="images/arcade-superman.jpeg" alt="Jocuri arcade FUN-O-RAMA"></div>
+        <div class="zone-copy">
+          <span class="zone-badge blue"><span class="ro">Jocuri arcade</span><span class="en">Arcade games</span></span>
+          <h3><span class="ro">Distracţie pentru toate vârstele, de la 7 la 70 de ani</span><span class="en">Fun for every age, from 7 to 70</span></h3>
+          <p><span class="ro">Cu jocurile noastre arcade variate, pentru toate grupele de vârstă de la 7 la 70 de ani, oaspeţii noştri se vor distra pe cinste şi nici nu vor observa cum trece timpul. Printre acestea se numără kiddie ride-uri, air hockey, baschet, o maşină de box cu premii, jocuri video, maşini cu cleşte cu premii şi diverse jocuri de îndemânare.</span><span class="en">With our varied arcade games for every age group from 7 to 70, our guests will have a great time and won't even notice the hours go by. These include kiddie rides, air hockey, basketball, a prize-winning boxing machine, video games, prize claw machines and various skill games.</span></p>
+          <div class="facts">
+            <span><span class="ro">Kiddie rides</span><span class="en">Kiddie rides</span></span>
+            <span><span class="ro">Air hockey</span><span class="en">Air hockey</span></span>
+            <span><span class="ro">Baschet</span><span class="en">Basketball</span></span>
+            <span><span class="ro">Maşină de box</span><span class="en">Boxing machine</span></span>
+            <span><span class="ro">Cleşte cu premii</span><span class="en">Claw machines</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="container">
+    <div class="split">
+      <div class="panel">
+        <div class="eyebrow"><span class="ro">Sistem Redemption</span><span class="en">Redemption system</span></div>
+        <h3><span class="ro">Joci, câştigi bilete, alegi premiul</span><span class="en">Play, earn tickets, pick a prize</span></h3>
+        <p><span class="ro">În timp ce se joacă la jocurile noastre arcade, oaspeţii noştri câştigă bilete (tickets). Cu biletele acumulate, pot alege produsul dorit din raionul nostru de jucării, în funcţie de punctajul obţinut.</span><span class="en">While playing our arcade games, guests earn tickets. With the tickets they collect, they can choose the product they want from our toy corner, according to their points.</span></p>
+      </div>
+      <div class="panel media">
+        <img src="images/arcade-goldball.jpeg" alt="Sistem redemption FUN-O-RAMA">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="container">
+    <div class="split">
+      <div class="panel media">
+        <img src="images/cafe.jpeg" alt="Cafe FUN-O-RAMA">
+      </div>
+      <div class="panel">
+        <div class="eyebrow"><span class="ro">Cafe</span><span class="en">Café</span></div>
+        <h3><span class="ro">O pauză dulce între jocuri</span><span class="en">A sweet break between games</span></h3>
+        <p><span class="ro">Cu băuturile noastre calde şi reci variate, oaspeţii noştri se pot bucura de un moment plăcut în zona de cafe, în timp ce se distrează cu ce le doreşte inima.</span><span class="en">With our variety of hot and cold drinks, our guests can enjoy a lovely moment in the café area while having exactly the kind of fun they're in the mood for.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="zi-de-nastere">
+  <div class="container">
+    <div class="birthday-card">
+      <div>
+        <div class="eyebrow"><span class="ro">Petreceri aniversare</span><span class="en">Birthday parties</span></div>
+        <h2><span class="ro">O aniversare de care copiii îşi vor aminti</span><span class="en">A birthday the kids will remember</span></h2>
+        <p><span class="ro">Avem diverse pachete de petreceri aniversare pentru toate grupele de vârstă. Oaspeţii noştri pot intra într-un nou an de viaţă jucându-se alături de familie şi prieteni, într-un eveniment plăcut şi plin de distracţie.</span><span class="en">We offer a variety of birthday packages for every age group. Our guests can step into a new year of life playing alongside family and friends, in an enjoyable, fun-filled event.</span></p>
+      </div>
+      <div class="contact-pill">
+        <div>
+          <div class="k"><span class="ro">Telefon</span><span class="en">Phone</span></div>
+          <a href="tel:+40728607770">+40 728 607 770</a>
+        </div>
+        <div>
+          <div class="k"><span class="ro">Email</span><span class="en">Email</span></div>
+          <a href="mailto:grandarenamall@funoramafun.com">grandarenamall@funoramafun.com</a>
+        </div>
+        <a class="btn btn-primary" style="justify-content:center;margin-top:6px;" href="mailto:grandarenamall@funoramafun.com">
+          <span class="ro">Cere ofertă petrecere</span>
+          <span class="en">Ask for a party quote</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="ro">Galerie</span><span class="en">Gallery</span></div>
+      <h2><span class="ro">O privire din interiorul FUN-O-RAMA</span><span class="en">A look inside FUN-O-RAMA</span></h2>
+    </div>
+    <div class="gallery-grid">
+      <img class="g1" src="images/ballpit-wide.jpeg" alt="Playground">
+      <img src="images/playground-rides.jpeg" alt="Playground rides">
+      <img src="images/arcade-surfari.jpeg" alt="Arcade">
+      <img src="images/billiard-single.jpeg" alt="Billiard">
+      <img class="g2" src="images/hockey-basketball.jpeg" alt="Arcade hockey">
+      <img src="images/aircombat-hockey.jpeg" alt="Air combat">
+      <img src="images/carousel-rides.jpeg" alt="Kiddie rides">
+      <img class="g5" src="images/billiard-wide.jpeg" alt="Billiard hall">
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="eyebrow"><span class="ro">Contact şi adresă</span><span class="en">Contact &amp; address</span></div>
+        <h2><span class="ro">Te aşteptăm în Grand Arena Mall</span><span class="en">We're waiting for you at Grand Arena Mall</span></h2>
+        <p><span class="ro">Pentru rezervări, petreceri aniversare sau orice întrebare despre FUN-O-RAMA Grand Arena Mall, scrie-ne sau sună-ne — îţi răspundem cu drag.</span><span class="en">For bookings, birthday parties, or any question about FUN-O-RAMA Grand Arena Mall, write or call us — we're happy to help.</span></p>
+
+        <div class="info-row">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <div>
+            <div class="t"><span class="ro">Adresă</span><span class="en">Address</span></div>
+            <div class="v">Bulevardul Metalurgiei nr. 12-18, Sector 4, Grand Arena Mall, Bucureşti, România</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8.3 6.7 15 15 15l2-4-5-2-2 2c-2.5-1.2-4.8-3.5-6-6l2-2-2-5-4 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="t"><span class="ro">Telefon</span><span class="en">Phone</span></div>
+            <div class="v"><a href="tel:+40728607770">+40 728 607 770</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <div>
+            <div class="t">Email</div>
+            <div class="v"><a href="mailto:grandarenamall@funoramafun.com">grandarenamall@funoramafun.com</a></div>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="https://www.instagram.com/funo_rama/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61565518268144" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5H14c-2.2 0-4 1.8-4 4v2H8v3.5h2V21h3.5v-6.5H16l.5-3.5h-3V9c0-.6.4-.5 1-.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps?q=Grand+Arena+Mall+Bulevardul+Metalurgiei+12-18+Bucuresti&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="FUN-O-RAMA Grand Arena Mall map"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="brand-mini">FUN-O-RAMA</span>
+    <span class="ro">E.G.S Turism S.R.L · Grand Arena Mall, Bucureşti · © 2026 FUN-O-RAMA. Toate drepturile rezervate.</span>
+    <span class="en">E.G.S Turism S.R.L · Grand Arena Mall, Bucharest · © 2026 FUN-O-RAMA. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang){
+    const html = document.documentElement;
+    html.classList.remove('lang-ro','lang-en');
+    html.classList.add('lang-'+lang);
+    html.setAttribute('lang', lang);
+    document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    try{ localStorage.setItem('funorama-lang', lang); }catch(e){}
+  }
+  (function(){
+    var saved = null;
+    try{ saved = localStorage.getItem('funorama-lang'); }catch(e){}
+    if(saved === 'en'){ setLang('en'); }
+  })();
+</script>
+
+</body>
+</html>
