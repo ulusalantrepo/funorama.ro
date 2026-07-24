@@ -1,2 +1,0 @@
-# funorama.ro
-funorama website
