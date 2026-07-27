@@ -4,28 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FUN-O-RAMA — Bowling, Billiard &amp; Family Entertainment Center | Grand Arena Mall Bucureşti</title>
-<meta name="description" content="FUN-O-RAMA Grand Arena Mall: bowling pe 6 piste, 4 mese de biliard, playground pentru copii şi zeci de jocuri arcade, în inima Bucureştiului.">
+<meta name="description" content="FUN-O-RAMA Grand Arena Mall: bowling, biliard, playground pentru copii şi zeci de jocuri arcade, în inima Bucureştiului.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #090c13;
-    --surface: #12161f;
-    --surface-2: #181d29;
-    --line: #262c3a;
-    --blue: #2cb3ea;
-    --blue-dim: #1c7fa8;
-    --red: #ea2430;
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #eef1f6;
+    --line: #e1e5ec;
+    --blue: #1f9cd8;
+    --blue-dim: #0f7aa8;
+    --red: #e2222d;
     --gold: #fdb927;
-    --text: #f4f3ee;
-    --muted: #97a0b3;
-    --muted-2: #6b7386;
+    --gold-strong: #c9860d;
+    --text: #14161c;
+    --muted: #5b6474;
+    --muted-2: #838ba0;
     --radius: 18px;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  section[id], .zone[id]{scroll-margin-top:96px;}
   body{
     margin:0;
     background:var(--bg);
@@ -56,13 +58,13 @@
     font-size:12.5px;
     letter-spacing:1.6px;
     text-transform:uppercase;
-    color:var(--gold);
+    color:var(--gold-strong);
     margin-bottom:14px;
   }
   .eyebrow::before{
     content:"";
     width:22px;height:2px;
-    background:var(--gold);
+    background:var(--gold-strong);
     display:inline-block;
     border-radius:2px;
   }
@@ -90,7 +92,7 @@
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(9,12,19,.86);
+    background:rgba(255,255,255,.82);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -137,6 +139,47 @@
     border-radius:2px;
   }
   nav.links a:hover::after{width:100%;}
+
+  .nav-item{position:relative;}
+  .nav-item > a{display:inline-flex;align-items:center;gap:5px;}
+  .nav-item > a .chev{transition:transform .2s ease;}
+  .nav-item:hover > a .chev{transform:rotate(180deg);}
+  .dropdown{
+    position:absolute;
+    top:100%;
+    left:50%;
+    transform:translateX(-50%);
+    padding-top:16px;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .18s ease, visibility .18s ease;
+    z-index:60;
+  }
+  .nav-item:hover .dropdown,
+  .nav-item:focus-within .dropdown{
+    opacity:1;
+    visibility:visible;
+  }
+  .dropdown-inner{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    min-width:200px;
+    box-shadow:0 20px 44px rgba(20,24,34,.14);
+  }
+  .dropdown-inner a{
+    display:block;
+    padding:10px 14px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .dropdown-inner a::after{content:none;}
+  .dropdown-inner a:hover{background:var(--surface-2);color:var(--text);}
 
   .nav-right{
     display:flex;
@@ -188,14 +231,14 @@
   .hero-bg{
     position:absolute;inset:0;
     background:url('images/WhatsApp%20Image%202026-07-24%20at%2012.58.45%20%285%29.jpeg') center 60% / cover no-repeat;
-    filter:saturate(1.15) brightness(.5);
+    filter:saturate(1.1) brightness(1.05);
     transform:scale(1.03);
   }
   .hero-scrim{
     position:absolute;inset:0;
     background:
-      linear-gradient(180deg, rgba(9,12,19,.55) 0%, rgba(9,12,19,.55) 40%, rgba(9,12,19,.96) 100%),
-      linear-gradient(90deg, rgba(9,12,19,.92) 0%, rgba(9,12,19,.35) 55%, rgba(9,12,19,.75) 100%);
+      linear-gradient(180deg, rgba(246,247,249,.62) 0%, rgba(246,247,249,.72) 45%, rgba(246,247,249,.98) 100%),
+      linear-gradient(90deg, rgba(246,247,249,.92) 0%, rgba(246,247,249,.5) 55%, rgba(246,247,249,.78) 100%);
   }
   .hero-content{
     position:relative;
@@ -209,7 +252,7 @@
     max-width:360px;
     width:52vw;
     margin-bottom:26px;
-    filter:drop-shadow(0 10px 30px rgba(0,0,0,.45));
+    filter:drop-shadow(0 8px 20px rgba(20,24,34,.18));
   }
   .hero h1{
     font-size:clamp(28px,4.6vw,52px);
@@ -218,7 +261,7 @@
     color:var(--text);
   }
   .hero h1 .accent{
-    background:linear-gradient(90deg,var(--blue),var(--gold));
+    background:linear-gradient(90deg,var(--blue),var(--gold-strong));
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -232,7 +275,7 @@
   .hero-tagline{
     font-family:'Caveat',cursive;
     font-size:26px;
-    color:var(--gold);
+    color:var(--gold-strong);
     margin-top:6px;
     display:inline-block;
   }
@@ -262,7 +305,12 @@
     box-shadow:0 8px 24px rgba(234,36,48,.32);
   }
   .btn-ghost{
-    background:rgba(255,255,255,.04);
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    color:var(--text);
+  }
+  .hero .btn-ghost{
+    background:rgba(255,255,255,.6);
     border:1px solid var(--line);
     color:var(--text);
   }
@@ -270,7 +318,7 @@
     position:relative;
     z-index:2;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:1px;
     background:var(--line);
     margin-top:56px;
@@ -278,7 +326,7 @@
     border-bottom:1px solid var(--line);
   }
   .hero-stats .stat{
-    background:rgba(9,12,19,.7);
+    background:var(--surface);
     padding:22px 20px;
     text-align:left;
   }
@@ -335,7 +383,7 @@
   .about-card h3{
     font-size:18px;
     margin-bottom:14px;
-    color:var(--gold);
+    color:var(--gold-strong);
   }
   .about-card ul{
     list-style:none;
@@ -378,8 +426,9 @@
   }
   .stat-strip{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:18px;
+    max-width:560px;
   }
   .stat-strip .box{
     background:var(--surface);
@@ -391,7 +440,7 @@
   .stat-strip .box .num{
     font-family:'Baloo 2',sans-serif;
     font-size:32px;
-    color:var(--gold);
+    color:var(--gold-strong);
   }
   .stat-strip .box .label{
     color:var(--muted);
@@ -434,7 +483,7 @@
   }
   .zone-badge.blue{background:rgba(44,179,234,.14);color:var(--blue);}
   .zone-badge.red{background:rgba(234,36,48,.14);color:#ff6b72;}
-  .zone-badge.gold{background:rgba(253,185,39,.14);color:var(--gold);}
+  .zone-badge.gold{background:rgba(253,185,39,.18);color:var(--gold-strong);}
   .zone h3{font-size:26px;margin-bottom:14px;}
   .zone p{color:var(--muted);margin:0 0 14px;}
   .zone .facts{
@@ -562,7 +611,7 @@
     border:1px solid var(--line);
     min-height:340px;
   }
-  .map-wrap iframe{width:100%;height:100%;min-height:340px;border:0;filter:grayscale(.3) invert(.92) contrast(.9);}
+  .map-wrap iframe{width:100%;height:100%;min-height:340px;border:0;}
 
   footer{
     padding:36px 0;
@@ -605,7 +654,20 @@
     <nav class="links">
       <a href="#despre"><span class="ro">Despre noi</span><span class="en">About</span></a>
       <a href="#locatie"><span class="ro">Locaţie</span><span class="en">Location</span></a>
-      <a href="#zone"><span class="ro">Zone de joc</span><span class="en">Play zones</span></a>
+      <div class="nav-item">
+        <a href="#zone">
+          <span class="ro">Zone de joc</span><span class="en">Play zones</span>
+          <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 8l7 8 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <div class="dropdown-inner">
+            <a href="#zona-playground"><span class="ro">Playground</span><span class="en">Playground</span></a>
+            <a href="#zona-bowling"><span class="ro">Bowling</span><span class="en">Bowling</span></a>
+            <a href="#zona-bilard"><span class="ro">Biliard</span><span class="en">Billiard</span></a>
+            <a href="#zona-arcade"><span class="ro">Jocuri arcade</span><span class="en">Arcade games</span></a>
+          </div>
+        </div>
+      </div>
       <a href="#zi-de-nastere"><span class="ro">Petreceri</span><span class="en">Birthdays</span></a>
       <a href="#contact"><span class="ro">Contact</span><span class="en">Contact</span></a>
     </nav>
@@ -628,8 +690,8 @@
       <span class="en">Bowling, billiard and <span class="accent">non-stop fun</span> under one roof</span>
     </h1>
     <p class="lead">
-      <span class="ro">FUN-O-RAMA Grand Arena Mall este centrul de familie şi entertainment din Bucureşti: piste de bowling, mese de biliard, playground pentru cei mici şi zeci de jocuri arcade cu premii.</span>
-      <span class="en">FUN-O-RAMA Grand Arena Mall is Bucharest's family entertainment center: bowling lanes, billiard tables, a playground for little ones and dozens of prize-winning arcade games.</span>
+      <span class="ro">FUN-O-RAMA Grand Arena Mall este centrul de familie şi entertainment din Bucureşti: bowling, biliard, playground pentru cei mici şi zeci de jocuri arcade cu premii.</span>
+      <span class="en">FUN-O-RAMA Grand Arena Mall is Bucharest's family entertainment center: bowling, billiard, a playground for little ones and dozens of prize-winning arcade games.</span>
     </p>
     <span class="hero-tagline">
       <span class="ro">1450 m² pline de distracţie.</span>
@@ -650,14 +712,6 @@
 
 <div class="container">
   <div class="hero-stats">
-    <div class="stat">
-      <div class="num"></div>
-      <div class="label"><span class="ro">Piste de bowling</span><span class="en">Bowling lanes</span></div>
-    </div>
-    <div class="stat">
-      <div class="num"></div>
-      <div class="label"><span class="ro">Mese de biliard</span><span class="en">Billiard tables</span></div>
-    </div>
     <div class="stat">
       <div class="num">350m²</div>
       <div class="label"><span class="ro">Playground copii</span><span class="en">Kids' playground</span></div>
@@ -719,14 +773,12 @@
       <div class="eyebrow"><span class="ro">FUN-O-RAMA Grand Arena Mall</span><span class="en">FUN-O-RAMA Grand Arena Mall</span></div>
       <h2><span class="ro">Punctul de întâlnire al distracţiei din Bucureşti</span><span class="en">Bucharest's meeting point for fun</span></h2>
       <p>
-        <span class="ro">Centrul nostru de bowling şi joacă pentru familie şi copii, situat în Grand Arena Mall, a devenit unul dintre reperele de neratat ale zonei. Pe 1450 m² găsiţi 6 piste de bowling, un playground, o cafenea, mese de biliard, jocuri arcade pentru toate vârstele şi un sistem de redemption care ţine oaspeţii mereu în priza distracţiei.</span>
-        <span class="en">Our bowling and family &amp; children's entertainment center inside Grand Arena Mall has become one of the area's not-to-be-missed spots. Across 1450 m² you'll find 6 bowling lanes, a playground, a café, billiard tables, arcade games for every age, and a redemption system that keeps guests coming back for more.</span>
+        <span class="ro">Centrul nostru de bowling şi joacă pentru familie şi copii, situat în Grand Arena Mall, a devenit unul dintre reperele de neratat ale zonei. Pe 1450 m² găsiţi bowling, un playground, o cafenea, mese de biliard, jocuri arcade pentru toate vârstele şi un sistem de redemption care ţine oaspeţii mereu în priza distracţiei.</span>
+        <span class="en">Our bowling and family &amp; children's entertainment center inside Grand Arena Mall has become one of the area's not-to-be-missed spots. Across 1450 m² you'll find bowling, a playground, a café, billiard tables, arcade games for every age, and a redemption system that keeps guests coming back for more.</span>
       </p>
     </div>
     <div class="stat-strip">
       <div class="box"><div class="num">2–10</div><div class="label"><span class="ro">Vârstă playground</span><span class="en">Playground ages</span></div></div>
-      <div class="box"><div class="num">6</div><div class="label"><span class="ro">Piste bowling</span><span class="en">Bowling lanes</span></div></div>
-      <div class="box"><div class="num">4</div><div class="label"><span class="ro">Mese biliard american</span><span class="en">American pool tables</span></div></div>
       <div class="box"><div class="num">7–70</div><div class="label"><span class="ro">Vârstă jocuri arcade</span><span class="en">Arcade games for ages</span></div></div>
     </div>
   </div>
@@ -742,7 +794,7 @@
 
     <div class="zone-list">
 
-      <div class="zone">
+      <div class="zone" id="zona-playground">
         <div class="zone-media"><img src="images/WhatsApp%20Image%202026-07-24%20at%2012.58.44%20%282%29.jpeg" alt="Playground FUN-O-RAMA"></div>
         <div class="zone-copy">
           <span class="zone-badge blue"><span class="ro">Playground</span><span class="en">Playground</span></span>
@@ -757,34 +809,32 @@
         </div>
       </div>
 
-      <div class="zone">
+      <div class="zone" id="zona-bowling">
         <div class="zone-media"><img src="images/WhatsApp%20Image%202026-07-24%20at%2012.58.44%20%281%29.jpeg" alt="Bowling FUN-O-RAMA"></div>
         <div class="zone-copy">
           <span class="zone-badge red"><span class="ro">Bowling</span><span class="en">Bowling</span></span>
-          <h3><span class="ro">6 piste, de la 7 la 70 de ani</span><span class="en">6 lanes, from age 7 to 70</span></h3>
-          <p><span class="ro">Zona noastră de bowling cu 6 piste este locul unde toţi oaspeţii noştri, de la 7 la 70 de ani, petrec timp de calitate. Serviţi o băutură caldă sau rece din zona de cafe şi bucuraţi-vă de o seară frumoasă alături de familie sau prieteni.</span><span class="en">Our 6-lane bowling area is where all our guests, from age 7 to 70, enjoy quality time together. Grab a hot or cold drink from our café corner and enjoy a great evening with family or friends.</span></p>
+          <h3><span class="ro">Bowling, de la 7 la 70 de ani</span><span class="en">Bowling, from age 7 to 70</span></h3>
+          <p><span class="ro">Zona noastră de bowling este locul unde toţi oaspeţii noştri, de la 7 la 70 de ani, petrec timp de calitate. Serviţi o băutură caldă sau rece din zona de cafe şi bucuraţi-vă de o seară frumoasă alături de familie sau prieteni.</span><span class="en">Our bowling area is where all our guests, from age 7 to 70, enjoy quality time together. Grab a hot or cold drink from our café corner and enjoy a great evening with family or friends.</span></p>
           <div class="facts">
-            <span><span class="ro">6 piste</span><span class="en">6 lanes</span></span>
             <span><span class="ro">De la 7 la 70 de ani</span><span class="en">Ages 7 to 70</span></span>
             <span><span class="ro">Cafe alăturat</span><span class="en">Café on-site</span></span>
           </div>
         </div>
       </div>
 
-      <div class="zone">
+      <div class="zone" id="zona-bilard">
         <div class="zone-media"><img src="images/WhatsApp%20Image%202026-07-24%20at%2012.58.45%20%287%29.jpeg" alt="Biliard FUN-O-RAMA"></div>
         <div class="zone-copy">
           <span class="zone-badge gold"><span class="ro">Biliard</span><span class="en">Billiard</span></span>
-          <h3><span class="ro">4 mese de biliard american</span><span class="en">4 American pool tables</span></h3>
-          <p><span class="ro">În zona noastră vă aşteaptă 4 mese de biliard american, într-un decor cu neon-uri şi atmosferă retro-arcade, perfecte pentru o partidă relaxată cu prietenii.</span><span class="en">Our area features 4 American pool tables, set in a neon-lit, retro-arcade atmosphere — perfect for a relaxed game with friends.</span></p>
+          <h3><span class="ro">Mese de biliard american</span><span class="en">American pool tables</span></h3>
+          <p><span class="ro">În zona noastră vă aşteaptă mese de biliard american, într-un decor cu neon-uri şi atmosferă retro-arcade, perfecte pentru o partidă relaxată cu prietenii.</span><span class="en">Our area features American pool tables, set in a neon-lit, retro-arcade atmosphere — perfect for a relaxed game with friends.</span></p>
           <div class="facts">
-            <span><span class="ro">4 mese</span><span class="en">4 tables</span></span>
             <span><span class="ro">Biliard american</span><span class="en">American pool</span></span>
           </div>
         </div>
       </div>
 
-      <div class="zone">
+      <div class="zone" id="zona-arcade">
         <div class="zone-media"><img src="images/WhatsApp%20Image%202026-07-24%20at%2012.58.45%20%281%29.jpeg" alt="Jocuri arcade FUN-O-RAMA"></div>
         <div class="zone-copy">
           <span class="zone-badge blue"><span class="ro">Jocuri arcade</span><span class="en">Arcade games</span></span>
